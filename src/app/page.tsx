@@ -258,17 +258,8 @@ export default function Home() {
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
         {/* Letter card */}
         <div className="bg-white border border-gray-200 rounded-2xl p-4 sm:p-6 md:p-8 mb-5 sm:mb-6 shadow-sm">
-          <div className="flex items-center justify-between mb-4">
+          <div className="mb-4">
             <span className="text-[10px] font-semibold tracking-wider uppercase text-gray-400">Contenu de la lettre</span>
-            <button
-              onClick={() => setEditing(!editing)}
-              className="text-[11px] font-medium text-indigo-500 hover:text-indigo-700 transition-colors cursor-pointer flex items-center gap-1"
-            >
-              <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
-              </svg>
-              {editing ? "Terminer" : "Modifier"}
-            </button>
           </div>
 
           {editing ? (
@@ -380,15 +371,26 @@ export default function Home() {
                       )}
                     </td>
                     <td className="pr-3">
-                      <button
-                        onClick={() => startEdit(entry)}
-                        className="text-gray-300 hover:text-indigo-500 cursor-pointer p-1 opacity-0 group-hover:opacity-100 transition-opacity"
-                        title="Modifier"
-                      >
-                        <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
-                        </svg>
-                      </button>
+                      <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button
+                          onClick={() => startEdit(entry)}
+                          className="text-gray-300 hover:text-indigo-500 cursor-pointer p-1"
+                          title="Modifier"
+                        >
+                          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                          </svg>
+                        </button>
+                        <button
+                          onClick={() => removeEntry(entry.id)}
+                          className="text-gray-300 hover:text-red-400 cursor-pointer p-1"
+                          title="Supprimer"
+                        >
+                          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}

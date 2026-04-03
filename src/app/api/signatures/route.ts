@@ -4,7 +4,19 @@ import path from "path";
 
 const DATA_DIR = process.env.DATA_DIR || path.join(process.cwd(), "data");
 const DATA_FILE = path.join(DATA_DIR, "signatures.json");
-const BUNDLED_DATA = path.join(process.cwd(), "data", "signatures.json");
+const BACKUP_FILE = path.join(DATA_DIR, "signatures_backup.json");
+
+// Auto-backup every 10 minutes
+const g = globalThis as unknown as Record<string, unknown>;
+if (!g.__backupInterval) {
+  g.__backupInterval = setInterval(() => {
+    try {
+      if (fs.existsSync(DATA_FILE)) {
+        fs.copyFileSync(DATA_FILE, BACKUP_FILE);
+      }
+    } catch { /* ignore */ }
+  }, 10 * 60 * 1000);
+}
 
 interface SignEntry {
   id: string;
@@ -17,19 +29,6 @@ interface SignEntry {
 function ensureDataDir() {
   if (!fs.existsSync(DATA_DIR)) {
     fs.mkdirSync(DATA_DIR, { recursive: true });
-  }
-  if (fs.existsSync(BUNDLED_DATA) && DATA_DIR !== path.join(process.cwd(), "data")) {
-    const bundled: SignEntry[] = JSON.parse(fs.readFileSync(BUNDLED_DATA, "utf-8"));
-    if (!fs.existsSync(DATA_FILE)) {
-      fs.writeFileSync(DATA_FILE, JSON.stringify(bundled, null, 2), "utf-8");
-    } else {
-      const current: SignEntry[] = JSON.parse(fs.readFileSync(DATA_FILE, "utf-8"));
-      const existingIds = new Set(current.map((e) => e.id));
-      const missing = bundled.filter((e) => !existingIds.has(e.id));
-      if (missing.length > 0) {
-        fs.writeFileSync(DATA_FILE, JSON.stringify([...current, ...missing], null, 2), "utf-8");
-      }
-    }
   }
 }
 
