@@ -322,19 +322,17 @@ export default function Home() {
               </span>
             </div>
 
-            {/* Mobile: card layout */}
+            {/* Mobile: single-line layout */}
             <div className="sm:hidden divide-y divide-gray-50">
               {entries.map((entry) => (
-                <div key={entry.id} className="px-4 py-3 flex items-center gap-3">
-                  <div className="shrink-0">
-                    <span className="text-[13px] font-medium text-gray-800 block truncate max-w-[120px]">{entry.nom}</span>
-                    <span className="text-[11px] text-gray-400">{entry.appartement}</span>
-                  </div>
+                <div key={entry.id} className="px-3 py-2.5 flex items-center gap-2">
+                  <span className="text-[11px] font-medium text-gray-800 truncate shrink-0 max-w-[90px]">{entry.nom}</span>
+                  <span className="text-[10px] text-gray-400 shrink-0">{entry.appartement}</span>
                   <div className="flex-1 min-w-0 flex items-center justify-center">
                     {entry.signatureData === "placeholder" ? (
-                      <span className="text-[10px] italic text-gray-300">Signature manquante</span>
+                      <span className="text-[9px] italic text-gray-300">—</span>
                     ) : (
-                      <img src={entry.signatureData} alt="" className="h-7 w-auto max-w-[120px] object-contain" />
+                      <img src={entry.signatureData} alt="" className="h-6 w-auto max-w-[80px] object-contain" />
                     )}
                   </div>
                   <button
@@ -342,8 +340,17 @@ export default function Home() {
                     className="text-gray-300 active:text-indigo-500 p-1 shrink-0"
                     title="Modifier"
                   >
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={() => removeEntry(entry.id)}
+                    className="text-gray-300 active:text-red-400 p-1 shrink-0"
+                    title="Supprimer"
+                  >
+                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                   </button>
                 </div>
@@ -373,26 +380,15 @@ export default function Home() {
                       )}
                     </td>
                     <td className="pr-3">
-                      <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button
-                          onClick={() => startEdit(entry)}
-                          className="text-gray-300 hover:text-indigo-500 cursor-pointer p-1"
-                          title="Modifier"
-                        >
-                          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
-                          </svg>
-                        </button>
-                        <button
-                          onClick={() => removeEntry(entry.id)}
-                          className="text-gray-300 hover:text-red-400 cursor-pointer p-1"
-                          title="Supprimer"
-                        >
-                          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                          </svg>
-                        </button>
-                      </div>
+                      <button
+                        onClick={() => startEdit(entry)}
+                        className="text-gray-300 hover:text-indigo-500 cursor-pointer p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                        title="Modifier"
+                      >
+                        <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                        </svg>
+                      </button>
                     </td>
                   </tr>
                 ))}

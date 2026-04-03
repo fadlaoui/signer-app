@@ -121,3 +121,4 @@ export async function DELETE(req: NextRequest) {
   writeData(filtered);
   return NextResponse.json({ ok: true });
 }
+
