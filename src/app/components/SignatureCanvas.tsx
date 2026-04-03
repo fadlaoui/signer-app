@@ -86,8 +86,7 @@ export default function SignatureCanvas({ onSignatureChange }: SignatureCanvasPr
       <div className={`relative border-2 rounded-xl bg-white overflow-hidden transition-colors ${hasDrawn ? "border-indigo-500" : "border-gray-200"}`}>
         <canvas
           ref={canvasRef}
-          className="sig-canvas block w-full"
-          style={{ height: "110px" }}
+          className="sig-canvas block w-full h-[140px] sm:h-[110px]"
           onMouseDown={startDraw}
           onMouseMove={draw}
           onMouseUp={stopDraw}

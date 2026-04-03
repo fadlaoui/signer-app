@@ -234,16 +234,16 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-indigo-600 px-6 py-3">
+      <header className="bg-indigo-600 px-4 sm:px-6 py-3">
         <div className="text-center">
-          <h1 className="text-white text-lg md:text-xl font-bold leading-snug mb-1">
+          <h1 className="text-white text-base sm:text-lg md:text-xl font-bold leading-snug mb-1">
             Demande urgente de dératisation
           </h1>
-          <p className="text-indigo-200 text-xs leading-relaxed max-w-xl mx-auto">
+          <p className="text-indigo-200 text-[11px] sm:text-xs leading-relaxed max-w-xl mx-auto">
             Signez cette lettre collective pour demander une intervention rapide dans les parties communes de l&apos;immeuble.
           </p>
           {entries.length > 0 && (
-            <span className="text-[11px] bg-white/20 text-white px-2.5 py-1 rounded-full mt-1">
+            <span className="text-[11px] bg-white/20 text-white px-2.5 py-1 rounded-full mt-1 inline-block">
               {entries.length} signature{entries.length > 1 ? "s" : ""}
             </span>
           )}
@@ -251,13 +251,13 @@ export default function Home() {
       </header>
 
       {!mounted ? (
-        <div className="max-w-3xl mx-auto px-6 py-16 text-center">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16 text-center">
           <p className="text-sm text-gray-400">Chargement...</p>
         </div>
       ) : (
-      <div className="max-w-3xl mx-auto px-6 py-8">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
         {/* Letter card */}
-        <div className="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 mb-6 shadow-sm">
+        <div className="bg-white border border-gray-200 rounded-2xl p-4 sm:p-6 md:p-8 mb-5 sm:mb-6 shadow-sm">
           <div className="flex items-center justify-between mb-4">
             <span className="text-[10px] font-semibold tracking-wider uppercase text-gray-400">Contenu de la lettre</span>
             <button
@@ -312,16 +312,60 @@ export default function Home() {
 
         {/* Datagrid */}
         {entries.length > 0 && (
-          <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden mb-6">
-            <div className="px-5 py-3.5 border-b border-gray-100 flex items-center justify-between">
-              <span className="text-[11px] font-semibold tracking-wider uppercase text-gray-400">
+          <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden mb-5 sm:mb-6">
+            <div className="px-4 sm:px-5 py-3 sm:py-3.5 border-b border-gray-100 flex items-center justify-between">
+              <span className="text-[10px] sm:text-[11px] font-semibold tracking-wider uppercase text-gray-400">
                 Signatures des copropriétaires
               </span>
-              <span className="text-[11px] text-gray-300">
+              <span className="text-[10px] sm:text-[11px] text-gray-300">
                 {entries.length} entrée{entries.length > 1 ? "s" : ""}
               </span>
             </div>
-            <table className="w-full text-left">
+
+            {/* Mobile: card layout */}
+            <div className="sm:hidden divide-y divide-gray-50">
+              {entries.map((entry) => (
+                <div key={entry.id} className="px-4 py-3 flex items-center gap-3">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-[13px] font-medium text-gray-800 truncate">{entry.nom}</span>
+                      <span className="text-[11px] text-gray-400 shrink-0">{entry.appartement}</span>
+                    </div>
+                    <div className="flex items-center gap-2 mt-1">
+                      {entry.signatureData === "placeholder" ? (
+                        <span className="text-[10px] italic text-gray-300">Signature manquante</span>
+                      ) : (
+                        <img src={entry.signatureData} alt="" className="h-6 w-auto max-w-[100px] object-contain" />
+                      )}
+                      <span className="text-[10px] text-gray-300 tabular-nums">{entry.date}</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-1 shrink-0">
+                    <button
+                      onClick={() => startEdit(entry)}
+                      className="text-gray-300 active:text-indigo-500 p-1.5"
+                      title="Modifier"
+                    >
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                      </svg>
+                    </button>
+                    <button
+                      onClick={() => removeEntry(entry.id)}
+                      className="text-gray-300 active:text-red-400 p-1.5"
+                      title="Supprimer"
+                    >
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop: table layout */}
+            <table className="hidden sm:table w-full text-left">
               <thead>
                 <tr className="bg-gray-50 text-[10px] font-semibold tracking-wider uppercase text-gray-400 border-b border-gray-100">
                   <th className="px-5 py-2.5 w-[30%]">Nom</th>
@@ -374,9 +418,9 @@ export default function Home() {
         )}
 
         {/* Sign form */}
-        <div ref={formRef} className={`bg-white border rounded-2xl shadow-sm p-6 md:p-8 ${editingEntry ? "border-indigo-300 ring-2 ring-indigo-100" : "border-gray-200"}`}>
+        <div ref={formRef} className={`bg-white border rounded-2xl shadow-sm p-4 sm:p-6 md:p-8 ${editingEntry ? "border-indigo-300 ring-2 ring-indigo-100" : "border-gray-200"}`}>
           <div className="flex items-center justify-between mb-1">
-            <h2 className="text-lg font-bold text-gray-900">
+            <h2 className="text-base sm:text-lg font-bold text-gray-900">
               {editingEntry ? "Modifier votre signature" : "Ajouter votre signature"}
             </h2>
             {editingEntry && (

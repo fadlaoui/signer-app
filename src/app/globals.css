@@ -15,3 +15,10 @@ body {
   touch-action: none;
   cursor: crosshair;
 }
+
+/* Prevent iOS zoom on input focus */
+@media (max-width: 640px) {
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+}
