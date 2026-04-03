@@ -18,8 +18,18 @@ function ensureDataDir() {
   if (!fs.existsSync(DATA_DIR)) {
     fs.mkdirSync(DATA_DIR, { recursive: true });
   }
-  if (!fs.existsSync(DATA_FILE) && fs.existsSync(BUNDLED_DATA) && DATA_DIR !== path.join(process.cwd(), "data")) {
-    fs.copyFileSync(BUNDLED_DATA, DATA_FILE);
+  if (fs.existsSync(BUNDLED_DATA) && DATA_DIR !== path.join(process.cwd(), "data")) {
+    const bundled: SignEntry[] = JSON.parse(fs.readFileSync(BUNDLED_DATA, "utf-8"));
+    if (!fs.existsSync(DATA_FILE)) {
+      fs.writeFileSync(DATA_FILE, JSON.stringify(bundled, null, 2), "utf-8");
+    } else {
+      const current: SignEntry[] = JSON.parse(fs.readFileSync(DATA_FILE, "utf-8"));
+      const existingIds = new Set(current.map((e) => e.id));
+      const missing = bundled.filter((e) => !existingIds.has(e.id));
+      if (missing.length > 0) {
+        fs.writeFileSync(DATA_FILE, JSON.stringify([...current, ...missing], null, 2), "utf-8");
+      }
+    }
   }
 }
 
