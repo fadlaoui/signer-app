@@ -326,6 +326,17 @@ export default function Home() {
             <div className="sm:hidden divide-y divide-gray-50">
               {entries.map((entry) => (
                 <div key={entry.id} className="px-4 py-3 flex items-center gap-3">
+                  <div className="shrink-0">
+                    <span className="text-[13px] font-medium text-gray-800 block truncate max-w-[120px]">{entry.nom}</span>
+                    <span className="text-[11px] text-gray-400">{entry.appartement}</span>
+                  </div>
+                  <div className="flex-1 min-w-0 flex items-center justify-center">
+                    {entry.signatureData === "placeholder" ? (
+                      <span className="text-[10px] italic text-gray-300">Signature manquante</span>
+                    ) : (
+                      <img src={entry.signatureData} alt="" className="h-7 w-auto max-w-[120px] object-contain" />
+                    )}
+                  </div>
                   <button
                     onClick={() => startEdit(entry)}
                     className="text-gray-300 active:text-indigo-500 p-1 shrink-0"
@@ -335,17 +346,6 @@ export default function Home() {
                       <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                     </svg>
                   </button>
-                  <div className="flex-1 min-w-0 flex items-center justify-center">
-                    {entry.signatureData === "placeholder" ? (
-                      <span className="text-[10px] italic text-gray-300">Signature manquante</span>
-                    ) : (
-                      <img src={entry.signatureData} alt="" className="h-7 w-auto max-w-[120px] object-contain" />
-                    )}
-                  </div>
-                  <div className="shrink-0 text-right">
-                    <span className="text-[13px] font-medium text-gray-800 block truncate max-w-[120px]">{entry.nom}</span>
-                    <span className="text-[11px] text-gray-400">{entry.appartement}</span>
-                  </div>
                 </div>
               ))}
             </div>
