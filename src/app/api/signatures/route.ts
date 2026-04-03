@@ -4,6 +4,7 @@ import path from "path";
 
 const DATA_DIR = process.env.DATA_DIR || path.join(process.cwd(), "data");
 const DATA_FILE = path.join(DATA_DIR, "signatures.json");
+const BUNDLED_DATA = path.join(process.cwd(), "data", "signatures.json");
 
 interface SignEntry {
   id: string;
@@ -16,6 +17,9 @@ interface SignEntry {
 function ensureDataDir() {
   if (!fs.existsSync(DATA_DIR)) {
     fs.mkdirSync(DATA_DIR, { recursive: true });
+  }
+  if (!fs.existsSync(DATA_FILE) && fs.existsSync(BUNDLED_DATA) && DATA_DIR !== path.join(process.cwd(), "data")) {
+    fs.copyFileSync(BUNDLED_DATA, DATA_FILE);
   }
 }
 
