@@ -326,39 +326,25 @@ export default function Home() {
             <div className="sm:hidden divide-y divide-gray-50">
               {entries.map((entry) => (
                 <div key={entry.id} className="px-4 py-3 flex items-center gap-3">
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-[13px] font-medium text-gray-800 truncate">{entry.nom}</span>
-                      <span className="text-[11px] text-gray-400 shrink-0">{entry.appartement}</span>
-                    </div>
-                    <div className="flex items-center gap-2 mt-1">
-                      {entry.signatureData === "placeholder" ? (
-                        <span className="text-[10px] italic text-gray-300">Signature manquante</span>
-                      ) : (
-                        <img src={entry.signatureData} alt="" className="h-6 w-auto max-w-[100px] object-contain" />
-                      )}
-                      <span className="text-[10px] text-gray-300 tabular-nums">{entry.date}</span>
-                    </div>
+                  <button
+                    onClick={() => startEdit(entry)}
+                    className="text-gray-300 active:text-indigo-500 p-1 shrink-0"
+                    title="Modifier"
+                  >
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                    </svg>
+                  </button>
+                  <div className="flex-1 min-w-0 flex items-center justify-center">
+                    {entry.signatureData === "placeholder" ? (
+                      <span className="text-[10px] italic text-gray-300">Signature manquante</span>
+                    ) : (
+                      <img src={entry.signatureData} alt="" className="h-7 w-auto max-w-[120px] object-contain" />
+                    )}
                   </div>
-                  <div className="flex items-center gap-1 shrink-0">
-                    <button
-                      onClick={() => startEdit(entry)}
-                      className="text-gray-300 active:text-indigo-500 p-1.5"
-                      title="Modifier"
-                    >
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
-                      </svg>
-                    </button>
-                    <button
-                      onClick={() => removeEntry(entry.id)}
-                      className="text-gray-300 active:text-red-400 p-1.5"
-                      title="Supprimer"
-                    >
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                      </svg>
-                    </button>
+                  <div className="shrink-0 text-right">
+                    <span className="text-[13px] font-medium text-gray-800 block truncate max-w-[120px]">{entry.nom}</span>
+                    <span className="text-[11px] text-gray-400">{entry.appartement}</span>
                   </div>
                 </div>
               ))}
@@ -371,7 +357,6 @@ export default function Home() {
                   <th className="px-5 py-2.5 w-[30%]">Nom</th>
                   <th className="px-5 py-2.5 w-[14%]">Appt</th>
                   <th className="px-5 py-2.5">Signature</th>
-                  <th className="px-5 py-2.5 w-[14%]">Date</th>
                   <th className="w-[60px]"></th>
                 </tr>
               </thead>
@@ -387,7 +372,6 @@ export default function Home() {
                         <img src={entry.signatureData} alt="" className="h-8 w-auto max-w-[140px] object-contain" />
                       )}
                     </td>
-                    <td className="px-5 py-3 text-[11px] text-gray-400 tabular-nums">{entry.date}</td>
                     <td className="pr-3">
                       <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                         <button
