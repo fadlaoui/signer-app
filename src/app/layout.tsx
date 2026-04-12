@@ -8,8 +8,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Signature — Dératisation Copropriété",
-  description: "Signez la lettre de demande de dératisation",
+  title: "Signatures — Copropriété",
+  description: "Signez les documents de votre copropriété",
 };
 
 export const viewport: Viewport = {
