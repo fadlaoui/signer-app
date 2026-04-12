@@ -8,7 +8,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Signatures — Copropriété",
+  title: "Portail Résidents — Résidence Les Orchidées Mannesmann",
   description: "Signez les documents de votre copropriété",
 };
 
