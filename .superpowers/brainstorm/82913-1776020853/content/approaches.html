@@ -1,0 +1,66 @@
+<h2>Architecture Approaches</h2>
+<p class="subtitle">How to structure multi-document signing + admin dashboard</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>File-Based (Extend Current) — Recommended</h3>
+      <p>Keep JSON file storage. Each document gets its own folder with a <code>meta.json</code> + <code>signatures.json</code> + attachments. Admin auth via a hashed password file. Simplest migration from current code.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul>
+          <li>Zero new dependencies</li>
+          <li>Familiar pattern — extends what exists</li>
+          <li>Easy backup/restore</li>
+          <li>Works great for small-to-medium scale</li>
+        </ul></div>
+        <div class="cons"><h4>Cons</h4><ul>
+          <li>No concurrent write safety</li>
+          <li>Slower with many documents (file I/O per request)</li>
+          <li>Admin accounts stored as JSON files</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>SQLite Database</h3>
+      <p>Migrate to SQLite for documents, signatures, and admin accounts. Proper relational tables. Attachments stored as files, referenced from DB.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul>
+          <li>Proper queries and indexing</li>
+          <li>Concurrent access handled</li>
+          <li>Better for stats/aggregation</li>
+          <li>Standard admin account management</li>
+        </ul></div>
+        <div class="cons"><h4>Cons</h4><ul>
+          <li>New dependency (better-sqlite3 or similar)</li>
+          <li>Migration from existing JSON data needed</li>
+          <li>Slightly more complex deployment</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Hybrid (JSON docs + cookie-based auth)</h3>
+      <p>Keep JSON files for documents/signatures (like option A) but add proper session-based auth with HTTP-only cookies and bcrypt-hashed passwords.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul>
+          <li>Best of both — simple storage, proper auth</li>
+          <li>Minimal new dependencies (just bcrypt)</li>
+          <li>Easy migration path</li>
+          <li>Secure admin sessions</li>
+        </ul></div>
+        <div class="cons"><h4>Cons</h4><ul>
+          <li>Still no concurrent write safety</li>
+          <li>Two storage patterns to maintain</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,151 @@
+<h2>App Layout — Resident View</h2>
+<p class="subtitle">Sidebar + document content area</p>
+
+<div class="mockup" style="max-width: 900px; margin: 0 auto;">
+  <div class="mockup-header">Resident View — Desktop</div>
+  <div class="mockup-body" style="display: flex; min-height: 500px; padding: 0;">
+    <!-- Sidebar -->
+    <div style="width: 260px; background: #312e81; color: white; padding: 16px; flex-shrink: 0;">
+      <div style="font-weight: 700; font-size: 18px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.2);">
+        📋 Documents
+      </div>
+      <div style="background: rgba(255,255,255,0.15); border-radius: 8px; padding: 12px; margin-bottom: 8px; cursor: pointer; border-left: 3px solid #a5b4fc;">
+        <div style="font-size: 13px; font-weight: 600;">Demande de dératisation</div>
+        <div style="font-size: 11px; opacity: 0.7; margin-top: 4px;">🟢 Ouvert · 20 signatures</div>
+      </div>
+      <div style="background: rgba(255,255,255,0.05); border-radius: 8px; padding: 12px; margin-bottom: 8px; cursor: pointer; border-left: 3px solid transparent;">
+        <div style="font-size: 13px; font-weight: 600;">Règlement parking</div>
+        <div style="font-size: 11px; opacity: 0.7; margin-top: 4px;">🟢 Ouvert · 5 signatures</div>
+      </div>
+      <div style="background: rgba(255,255,255,0.05); border-radius: 8px; padding: 12px; margin-bottom: 8px; cursor: pointer; border-left: 3px solid transparent;">
+        <div style="font-size: 13px; font-weight: 600;">Travaux ascenseur</div>
+        <div style="font-size: 11px; opacity: 0.7; margin-top: 4px;">🔴 Fermé · 32 signatures</div>
+      </div>
+    </div>
+    <!-- Main Content -->
+    <div style="flex: 1; padding: 24px; background: #f9fafb;">
+      <div style="max-width: 640px; margin: 0 auto;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <h3 style="margin: 0; font-size: 20px; color: #1e1b4b;">Demande urgente de dératisation</h3>
+          <span style="background: #dcfce7; color: #166534; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">Ouvert</span>
+        </div>
+        <!-- Letter -->
+        <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 20px;">
+          <p style="font-size: 13px; color: #4b5563; line-height: 1.6;">Madame, Monsieur, Nous, copropriétaires de l'immeuble situé au [...], vous adressons cette demande urgente concernant un problème de nuisibles...</p>
+          <div style="margin-top: 12px;">
+            <span style="font-size: 11px; background: #eef2ff; color: #4338ca; padding: 3px 8px; border-radius: 4px;">📎 rapport-inspection.pdf</span>
+            <span style="font-size: 11px; background: #eef2ff; color: #4338ca; padding: 3px 8px; border-radius: 4px; margin-left: 4px;">📎 photos.jpg</span>
+          </div>
+        </div>
+        <!-- Signature Form -->
+        <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 20px;">
+          <h4 style="margin: 0 0 12px 0; font-size: 15px; color: #1e1b4b;">Ajouter ma signature</h4>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px;">
+            <input class="mock-input" placeholder="Nom complet" style="font-size: 13px;">
+            <input class="mock-input" placeholder="Appartement" style="font-size: 13px;">
+          </div>
+          <div style="background: #f9fafb; border: 2px dashed #d1d5db; border-radius: 8px; height: 80px; display: flex; align-items: center; justify-content: center; color: #9ca3af; font-size: 13px; margin-bottom: 12px;">
+            ✍️ Dessinez votre signature ici
+          </div>
+          <button class="mock-button" style="background: #4f46e5; color: white; width: 100%; border: none; padding: 10px; border-radius: 8px; font-weight: 600;">Signer</button>
+        </div>
+        <!-- Existing Signatures -->
+        <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+          <h4 style="margin: 0 0 12px 0; font-size: 15px; color: #1e1b4b;">20 signatures</h4>
+          <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f3f4f6; font-size: 13px;">
+            <span style="font-weight: 500;">Mohamed Fadlaoui</span>
+            <span style="color: #6b7280;">Apt 12</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f3f4f6; font-size: 13px;">
+            <span style="font-weight: 500;">Jean Dupont</span>
+            <span style="color: #6b7280;">Apt 3</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 8px 0; font-size: 13px;">
+            <span style="font-weight: 500;">Marie Laurent</span>
+            <span style="color: #6b7280;">Apt 7</span>
+          </div>
+          <div style="text-align: center; color: #9ca3af; font-size: 12px; margin-top: 8px;">+ 17 autres signatures</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2 style="margin-top: 40px;">Admin Dashboard</h2>
+<p class="subtitle">Document management + stats</p>
+
+<div class="mockup" style="max-width: 900px; margin: 0 auto;">
+  <div class="mockup-header">Admin Dashboard</div>
+  <div class="mockup-body" style="display: flex; min-height: 500px; padding: 0;">
+    <!-- Admin Sidebar -->
+    <div style="width: 220px; background: #1e1b4b; color: white; padding: 16px; flex-shrink: 0;">
+      <div style="font-weight: 700; font-size: 16px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.2);">
+        ⚙️ Admin
+      </div>
+      <div style="padding: 10px; border-radius: 6px; background: rgba(255,255,255,0.1); margin-bottom: 4px; font-size: 13px; cursor: pointer;">📄 Documents</div>
+      <div style="padding: 10px; border-radius: 6px; margin-bottom: 4px; font-size: 13px; cursor: pointer; opacity: 0.7;">📊 Statistiques</div>
+      <div style="padding: 10px; border-radius: 6px; margin-bottom: 4px; font-size: 13px; cursor: pointer; opacity: 0.7;">👥 Comptes admin</div>
+      <div style="padding: 10px; border-radius: 6px; margin-bottom: 4px; font-size: 13px; cursor: pointer; opacity: 0.7;">📦 Export</div>
+    </div>
+    <!-- Main -->
+    <div style="flex: 1; padding: 24px; background: #f9fafb;">
+      <!-- Stats Bar -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px; margin-bottom: 24px;">
+        <div style="background: white; border-radius: 10px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);">
+          <div style="font-size: 11px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">Documents</div>
+          <div style="font-size: 28px; font-weight: 700; color: #1e1b4b;">6</div>
+        </div>
+        <div style="background: white; border-radius: 10px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);">
+          <div style="font-size: 11px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">Ouverts</div>
+          <div style="font-size: 28px; font-weight: 700; color: #16a34a;">3</div>
+        </div>
+        <div style="background: white; border-radius: 10px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);">
+          <div style="font-size: 11px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">Total signatures</div>
+          <div style="font-size: 28px; font-weight: 700; color: #4f46e5;">127</div>
+        </div>
+        <div style="background: white; border-radius: 10px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);">
+          <div style="font-size: 11px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">Brouillons</div>
+          <div style="font-size: 28px; font-weight: 700; color: #f59e0b;">2</div>
+        </div>
+      </div>
+      <!-- Document List -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <h3 style="margin: 0; font-size: 18px;">Tous les documents</h3>
+        <button class="mock-button" style="background: #4f46e5; color: white; border: none; padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600;">+ Nouveau document</button>
+      </div>
+      <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.08);">
+        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 80px; padding: 12px 16px; background: #f9fafb; font-size: 11px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">
+          <span>Titre</span><span>Statut</span><span>Signatures</span><span>Créé le</span><span>Actions</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 80px; padding: 14px 16px; border-bottom: 1px solid #f3f4f6; font-size: 13px; align-items: center;">
+          <span style="font-weight: 500;">Demande de dératisation</span>
+          <span><span style="background: #dcfce7; color: #166534; padding: 2px 8px; border-radius: 10px; font-size: 11px;">Ouvert</span></span>
+          <span>20</span>
+          <span style="color: #6b7280;">12/04/2026</span>
+          <span style="color: #4f46e5; cursor: pointer;">✏️ 🗑️ 📥</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 80px; padding: 14px 16px; border-bottom: 1px solid #f3f4f6; font-size: 13px; align-items: center;">
+          <span style="font-weight: 500;">Règlement parking</span>
+          <span><span style="background: #dcfce7; color: #166534; padding: 2px 8px; border-radius: 10px; font-size: 11px;">Ouvert</span></span>
+          <span>5</span>
+          <span style="color: #6b7280;">10/04/2026</span>
+          <span style="color: #4f46e5; cursor: pointer;">✏️ 🗑️ 📥</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 80px; padding: 14px 16px; border-bottom: 1px solid #f3f4f6; font-size: 13px; align-items: center;">
+          <span style="font-weight: 500;">Travaux ascenseur</span>
+          <span><span style="background: #fee2e2; color: #991b1b; padding: 2px 8px; border-radius: 10px; font-size: 11px;">Fermé</span></span>
+          <span>32</span>
+          <span style="color: #6b7280;">01/03/2026</span>
+          <span style="color: #4f46e5; cursor: pointer;">✏️ 🗑️ 📥</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 80px; padding: 14px 16px; font-size: 13px; align-items: center;">
+          <span style="font-weight: 500;">Nouvelle chaudière</span>
+          <span><span style="background: #fef3c7; color: #92400e; padding: 2px 8px; border-radius: 10px; font-size: 11px;">Brouillon</span></span>
+          <span>—</span>
+          <span style="color: #6b7280;">11/04/2026</span>
+          <span style="color: #4f46e5; cursor: pointer;">✏️ 🗑️ 📥</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
