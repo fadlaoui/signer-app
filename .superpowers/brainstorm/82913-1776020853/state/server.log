@@ -1,5 +1,0 @@
-{"type":"server-started","port":51200,"host":"127.0.0.1","url_host":"localhost","url":"http://localhost:51200","screen_dir":"/Users/mohamedfadlaoui/Tools/signer-app/.superpowers/brainstorm/82913-1776020853/content","state_dir":"/Users/mohamedfadlaoui/Tools/signer-app/.superpowers/brainstorm/82913-1776020853/state"}
-{"type":"screen-added","file":"/Users/mohamedfadlaoui/Tools/signer-app/.superpowers/brainstorm/82913-1776020853/content/approaches.html"}
-{"type":"screen-added","file":"/Users/mohamedfadlaoui/Tools/signer-app/.superpowers/brainstorm/82913-1776020853/content/layout-design.html"}
-{"type":"screen-added","file":"/Users/mohamedfadlaoui/Tools/signer-app/.superpowers/brainstorm/82913-1776020853/content/waiting.html"}
-{"type":"server-stopped","reason":"idle timeout"}

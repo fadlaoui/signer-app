@@ -36,6 +36,12 @@ yarn-error.log*
 # vercel
 .vercel
 
+# superpowers brainstorm
+.superpowers/
+
+# backup data
+data/signatures_backup.json
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
