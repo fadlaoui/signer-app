@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Document {
+  id          String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title       String
+  body        String      @default("")
+  status      String      @default("draft")
+  attachments Json        @default("[]")
+  createdAt   DateTime    @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt   DateTime    @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+  signatures  Signature[]
+
+  @@map("documents")
+}
+
+model Signature {
+  id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  documentId    String   @map("document_id") @db.Uuid
+  nom           String
+  appartement   String
+  signatureData String   @map("signature_data")
+  date          String
+  createdAt     DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt     DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+  document      Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@index([documentId])
+  @@map("signatures")
+}

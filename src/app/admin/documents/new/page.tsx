@@ -32,7 +32,8 @@ export default function NewDocument() {
       .single();
 
     if (error || !doc) {
-      showToast("Erreur lors de la création");
+      console.error("Insert error:", error);
+      showToast(error?.message || "Erreur lors de la création");
       setLoading(false);
       return;
     }

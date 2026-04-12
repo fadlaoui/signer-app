@@ -1,27 +1,20 @@
--- Documents table
-CREATE TABLE IF NOT EXISTS documents (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  title TEXT NOT NULL,
-  body TEXT NOT NULL DEFAULT '',
-  status TEXT NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'open', 'closed')),
-  attachments JSONB NOT NULL DEFAULT '[]'::jsonb,
-  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
-);
+import "dotenv/config";
+import { Client } from "pg";
 
--- Signatures table
-CREATE TABLE IF NOT EXISTS signatures (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  document_id UUID NOT NULL REFERENCES documents(id) ON DELETE CASCADE,
-  nom TEXT NOT NULL,
-  appartement TEXT NOT NULL,
-  signature_data TEXT NOT NULL,
-  date TEXT NOT NULL,
-  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
-);
+const DIRECT_URL = process.env.DIRECT_URL;
 
-CREATE INDEX IF NOT EXISTS idx_signatures_document_id ON signatures(document_id);
+if (!DIRECT_URL) {
+  console.error("Missing DIRECT_URL in .env");
+  process.exit(1);
+}
+
+const sql = `
+-- Restore Supabase default grants (needed after prisma db push --force-reset)
+GRANT USAGE ON SCHEMA public TO anon, authenticated;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO anon, authenticated;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO anon, authenticated;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO anon, authenticated;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT USAGE, SELECT ON SEQUENCES TO anon, authenticated;
 
 -- Enable RLS
 ALTER TABLE documents ENABLE ROW LEVEL SECURITY;
@@ -112,7 +105,7 @@ DO $$ BEGIN
   END IF;
 END $$;
 
--- Auto-update updated_at
+-- Auto-update updated_at trigger
 CREATE OR REPLACE FUNCTION update_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -168,3 +161,21 @@ DO $$ BEGIN
       USING (bucket_id = 'attachments');
   END IF;
 END $$;
+`;
+
+async function main() {
+  console.log("Connecting to database...");
+  const client = new Client({ connectionString: DIRECT_URL });
+  await client.connect();
+
+  console.log("Applying RLS policies, triggers, and storage bucket...");
+  await client.query(sql);
+  console.log("Done!");
+
+  await client.end();
+}
+
+main().catch((e) => {
+  console.error("Failed:", e.message);
+  process.exit(1);
+});

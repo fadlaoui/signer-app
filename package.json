@@ -6,15 +6,23 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "setup-db": "prisma generate && prisma db push && tsx scripts/setup-rls.ts && prisma db seed",
+    "postinstall": "prisma generate"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
+    "@prisma/client": "^7.7.0",
     "@supabase/ssr": "^0.10.2",
     "@supabase/supabase-js": "^2.103.0",
     "jspdf": "^4.2.1",
     "jszip": "^3.10.1",
     "next": "16.2.2",
     "pdf-lib": "^1.17.1",
+    "pg": "^8.20.0",
+    "prisma": "^7.7.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "sharp": "^0.34.5"
@@ -22,6 +30,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
+    "@types/pg": "^8.20.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",

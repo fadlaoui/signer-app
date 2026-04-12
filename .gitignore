@@ -45,3 +45,5 @@ data/signatures_backup.json
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+/src/generated/prisma
